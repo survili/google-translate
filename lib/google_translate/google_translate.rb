@@ -25,7 +25,9 @@ class GoogleTranslate
     begin
       url = GOOGLE_TRANSLATE_SERVICE_URL + "/translate_a/t?client=t&text=#{from_text}&hl=#{from}&sl=#{from}&tl=#{to}&multires=1&prev=btn&ssel=0&tsel=4&uptl=#{to}&alttl=#{from}&sc=1"
 
-      open(URI.escape(url)) do |stream|
+      open(URI.escape(url),
+          "User-Agent" => "Mozilla/5.0 (Windows NT 5.1; rv:10.0.2) Gecko/20100101 Firefox/10.0.2") 
+      do |stream|
         content = stream.read
 
         s = content.split(',').collect { |s| s == '' ? "\"\"" : s }.join(",")
